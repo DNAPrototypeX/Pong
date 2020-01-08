@@ -28,7 +28,23 @@ players = [Player(screen, (30, 200, 20, 100), WHITE),
            Player(screen, (650, 200, 20, 100), WHITE)]
 ball = Ball(screen, (330, 230, 20, 20), WHITE, players)
 font = pygame.font.SysFont('Calibri', 25, True, False)
+title_screen = pygame.image.load('titlescreen.png').convert()
 
+
+def waitforkeypress():
+    while True:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_ESCAPE:
+                    pygame.quit()
+                return
+
+
+screen.blit(title_screen, (0, 0))
+pygame.display.flip()
+waitforkeypress()
 # -------- Main Program Loop -----------
 while not done:
     # --- Main event loop

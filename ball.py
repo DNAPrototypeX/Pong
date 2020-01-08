@@ -39,12 +39,21 @@ class Ball:
 
         for player in self.players:
             if self.rect.colliderect(player):
-                self.x_speed *= -1
                 self.total_rebounds += 1
                 if player == self.players[0]:
-                    self.x_speed += self.total_rebounds * 0.05
+                    if player.rect.colliderect(self.rect.x - self.x_speed, self.rect.y
+                                               , self.rect.width, self.rect.height):
+                        self.y_speed *= -1
+                    else:
+                        self.x_speed *= -1
+                        self.x_speed += self.total_rebounds * 0.05
                 elif player == self.players[1]:
-                    self.x_speed -= self.total_rebounds * 0.05
+                    if player.rect.colliderect(self.rect.x - self.x_speed, self.rect.y
+                                               , self.rect.width, self.rect.height):
+                        self.y_speed *= -1
+                    else:
+                        self.x_speed *= -1
+                        self.x_speed -= self.total_rebounds * 0.05
                 if player.speed != 0:
                     if player.speed > 0:
                         self.y_speed -= 1 + (random.random() * 1.5)
