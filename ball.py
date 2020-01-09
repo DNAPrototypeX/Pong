@@ -1,6 +1,9 @@
 import pygame
 import random
-
+pygame.init()
+collide_player = pygame.mixer.Sound('player_collide.wav')
+collide_wall = pygame.mixer.Sound('wall_collide.wav')
+point_scored = pygame.mixer.Sound('point_scored.wav')
 
 class Ball:
     def __init__(self, screen, rect, colour, players):
@@ -17,11 +20,14 @@ class Ball:
     def update(self):
 
         if self.rect.y < 0:
+            collide_wall.play()
             self.y_speed *= -1
         elif self.rect.y > 480:
+            collide_wall.play()
             self.y_speed *= -1
 
         if self.rect.x > 680:
+            point_scored.play()
             self.rect.x = 330
             self.rect.y = 230
             self.y_speed = 0
@@ -30,6 +36,7 @@ class Ball:
             self.total_rebounds = 0
 
         elif self.rect.x < 0:
+            point_scored.play()
             self.rect.x = 330
             self.rect.y = 230
             self.y_speed = 0
@@ -39,6 +46,7 @@ class Ball:
 
         for player in self.players:
             if self.rect.colliderect(player):
+                collide_player.play()
                 self.total_rebounds += 1
                 if player == self.players[0]:
                     if player.rect.colliderect(self.rect.x - self.x_speed, self.rect.y

@@ -1,5 +1,5 @@
 import pygame
-
+pygame.init()
 
 class Player:
     def __init__(self, screen, rect, colour):
