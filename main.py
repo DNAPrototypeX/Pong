@@ -1,5 +1,6 @@
     # Paul Moore
-def Main:
+
+def Main():
     import pygame
     from player import Player
     from ball import Ball
@@ -63,7 +64,7 @@ def Main:
 
             pygame.display.flip()
 
-    def gameover:
+    def gameover():
         while True:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
@@ -137,3 +138,4 @@ def Main:
 
     # Close the window and quit.
     sys.exit()
+Main()
